@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="走進烏來山林，在馥森阪治 Trio 享受山景湯屋、因諾莉餐廳原民風美饌與森林中的慢時光。">
+    <title>馥森阪治 Trio｜把一個下午，留給山裡 ‧ 烏來溫泉與因諾莉景觀餐廳</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            green: '#243e32',
+                            lightgreen: '#345545',
+                            cream: '#f6f3eb',
+                            sand: '#eae4d5',
+                            gold: '#b5a17c',
+                            darkgold: '#8c7752',
+                            ink: '#25362e',
+                            muted: '#687268'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Noto Serif TC', 'Georgia', 'serif'],
+                        sans: ['Noto Sans TC', 'Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f6f3eb;
+            color: #25362e;
+        }
+        .font-serif-title {
+            font-family: 'Noto Serif TC', serif;
+        }
+        /* Custom image hover effect */
+        .zoom-img {
+            transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .zoom-img-container:hover .zoom-img {
+            transform: scale(1.05);
+        }
+        /* Soft mist backdrop blur animation */
+        @keyframes mistFlow {
+            0% { transform: translateY(0) scale(1); opacity: 0.25; }
+            50% { transform: translateY(-12px) scale(1.05); opacity: 0.45; }
+            100% { transform: translateY(-25px) scale(1.1); opacity: 0; }
+        }
+        .mist-effect {
+            animation: mistFlow 6s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-brand-cream text-brand-ink antialiased selection:bg-brand-green selection:text-brand-cream">
+
+    <!-- Header / Sticky Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-brand-cream/90 backdrop-blur-md border-b border-brand-sand/80" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-full bg-brand-green flex items-center justify-center text-brand-gold text-lg font-serif shadow-md group-hover:bg-brand-lightgreen transition">
+                    馥
+                </div>
+                <div>
+                    <span class="text-xl sm:text-2xl font-serif-title font-semibold tracking-widest block text-brand-green">馥森 阪治</span>
+                    <span class="text-[10px] text-brand-muted tracking-[0.25em] block uppercase font-light">Fusen Banzhi Trio</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex items-center space-x-8 text-xs sm:text-sm font-medium tracking-widest text-brand-ink">
+                <a href="#about" class="hover:text-brand-gold transition-colors">關於阪治</a>
+                <a href="#bathhouse" class="hover:text-brand-gold transition-colors">山景湯屋</a>
+                <a href="#dining" class="hover:text-brand-gold transition-colors">因諾莉餐廳</a>
+                <a href="#sensory" class="hover:text-brand-gold transition-colors">森林慢時光</a>
+                <a href="#transport" class="hover:text-brand-gold transition-colors">交通指引</a>
+                <a href="#reservation" class="hover:text-brand-gold transition-colors">線上預約</a>
+            </nav>
+
+            <!-- Reserve Button (Desktop) -->
+            <div class="hidden sm:flex items-center space-x-3">
+                <a href="tel:0226616688" class="text-xs text-brand-green border border-brand-green/30 hover:border-brand-green px-3.5 py-2 rounded-full transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-phone text-brand-gold"></i> 02-2661-6688
+                </a>
+                <a href="#reservation" class="bg-brand-green hover:bg-brand-lightgreen text-brand-cream text-xs tracking-wider px-5 py-2.5 rounded-full shadow-md transition transform hover:-translate-y-0.5">
+                    立即預約 ↗
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="mobile-menu-btn" class="lg:hidden text-brand-green p-2 focus:outline-none" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars text-2xl" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-brand-cream border-b border-brand-sand px-6 py-6 space-y-4 shadow-xl">
+            <a href="#about" class="block text-brand-ink hover:text-brand-gold py-2 border-b border-brand-sand/50 text-sm tracking-wider">關於阪治</a>
+            <a href="#bathhouse" class="block text-brand-ink hover:text-brand-gold py-2 border-b border-brand-sand/50 text-sm tracking-wider">山景湯屋 (五大房型)</a>
+            <a href="#dining" class="block text-brand-ink hover:text-brand-gold py-2 border-b border-brand-sand/50 text-sm tracking-wider">因諾莉餐廳 (原民美饌)</a>
+            <a href="#sensory" class="block text-brand-ink hover:text-brand-gold py-2 border-b border-brand-sand/50 text-sm tracking-wider">森林慢時光與儀式</a>
+            <a href="#transport" class="block text-brand-ink hover:text-brand-gold py-2 border-b border-brand-sand/50 text-sm tracking-wider">交通資訊與接駁</a>
+            <a href="#reservation" class="block text-brand-ink hover:text-brand-gold py-2 text-sm tracking-wider">線上預約 / 試算</a>
+            <div class="pt-2 flex flex-col gap-3">
+                <a href="#reservation" class="text-center bg-brand-green text-brand-cream py-3 rounded-xl font-medium text-sm tracking-wider">
+                    立即預約湯屋與用餐
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-brand-green text-brand-cream">
+        <!-- Hero Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=2000&q=80" 
+                 alt="馥森阪治烏來山景湯屋" 
+                 class="w-full h-full object-cover opacity-40 scale-105 transform transition duration-1000"
+                 onerror="this.src='https://placehold.co/1920x1080/243e32/f6f3eb?text=Fusen+Banzhi+Trio'">
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-green via-brand-green/30 to-brand-green/70"></div>
+        </div>
+
+        <!-- Fog / Steam Ambient Overlay -->
+        <div class="absolute inset-0 pointer-events-none z-10 flex justify-center items-end opacity-20">
+            <div class="w-full h-80 bg-gradient-to-t from-white/30 to-transparent mist-effect"></div>
+        </div>
+
+        <!-- Main Hero Content -->
+        <div class="relative z-20 max-w-5xl mx-auto px-6 text-center py-20">
+            <span class="inline-block px-4 py-1.5 rounded-full bg-brand-lightgreen/80 border border-brand-gold/40 text-brand-gold text-xs sm:text-sm tracking-[0.3em] uppercase mb-8 backdrop-blur-sm">
+                WULAI ‧ TAIWAN ‧ HOT SPRING & CUISINE
+            </span>
+            
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-light font-serif-title tracking-[0.2em] leading-tight mb-8 text-brand-cream">
+                把一個下午，<br class="sm:hidden"><span class="text-brand-gold font-normal">留給山裡</span>
+            </h1>
+
+            <p class="text-sm sm:text-lg text-brand-cream/80 max-w-2xl mx-auto font-light leading-relaxed mb-12 tracking-widest">
+                穿過泰雅虹橋意象，踏入深翠山林。<br class="hidden sm:inline">
+                聽風、觀霧、浸泡弱鹼碳酸氫鈉泉，品嚐因諾莉原民風靈魂佳餚。
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-5 justify-center items-center">
+                <a href="#reservation" class="w-full sm:w-auto px-9 py-4 bg-brand-gold hover:bg-brand-darkgold text-brand-ink font-semibold rounded-full shadow-lg transition-all transform hover:-translate-y-0.5 text-center text-sm tracking-widest">
+                    <i class="fa-solid fa-calendar-days mr-2"></i> 線上預約體驗
+                </a>
+                <a href="#bathhouse" class="w-full sm:w-auto px-9 py-4 bg-brand-green/60 hover:bg-brand-green text-brand-cream font-light rounded-full border border-brand-gold/50 backdrop-blur-sm transition text-center text-sm tracking-widest">
+                    <i class="fa-solid fa-hot-tub-person mr-2"></i> 探索山景湯屋
+                </a>
+            </div>
+
+            <!-- Quick Key Highlights Bar -->
+            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 bg-brand-cream/10 border border-brand-gold/20 p-5 rounded-2xl backdrop-blur-md max-w-4xl mx-auto">
+                <div class="p-2 border-r border-brand-gold/20 last:border-none">
+                    <span class="block text-brand-gold text-xs font-light tracking-wider">湯屋房型</span>
+                    <span class="block text-brand-cream text-sm sm:text-base font-serif-title mt-1">虹音 ‧ 夢杻 ‧ 聊遮 5款</span>
+                </div>
+                <div class="p-2 border-r border-brand-gold/20 last:border-none">
+                    <span class="block text-brand-gold text-xs font-light tracking-wider">原民餐飲</span>
+                    <span class="block text-brand-cream text-sm sm:text-base font-serif-title mt-1">因諾莉 Innori 餐廳</span>
+                </div>
+                <div class="p-2 border-r border-brand-gold/20 last:border-none">
+                    <span class="block text-brand-gold text-xs font-light tracking-wider">泉質認證</span>
+                    <span class="block text-brand-cream text-sm sm:text-base font-serif-title mt-1">無色無味 美人湯</span>
+                </div>
+                <div class="p-2">
+                    <span class="block text-brand-gold text-xs font-light tracking-wider">接駁服務</span>
+                    <span class="block text-brand-cream text-sm sm:text-base font-serif-title mt-1">新店捷運站接駁專車</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About / Brand Philosophy Section -->
+    <section id="about" class="py-24 bg-brand-cream text-brand-ink relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                
+                <!-- Left Architecture Photo Group -->
+                <div class="relative">
+                    <div class="zoom-img-container rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                        <img src="https://images.unsplash.com/photo-1511884642898-4c92249e20b6?auto=format&fit=crop&w=900&q=80" 
+                             alt="馥森阪治建築風格" 
+                             class="w-full h-[460px] object-cover zoom-img"
+                             onerror="this.src='https://placehold.co/800x600/345545/f6f3eb?text=Fusen+Architecture'">
+                    </div>
+                    <!-- Secondary Accent Box -->
+                    <div class="absolute -bottom-8 -right-4 sm:-right-8 z-10 w-3/5 bg-brand-green text-brand-cream p-6 rounded-2xl shadow-2xl border border-brand-gold/30 hidden sm:block">
+                        <span class="text-brand-gold text-xs tracking-widest block mb-1">ATAYAL TRADITION</span>
+                        <h4 class="font-serif-title text-base font-medium">鷹架建築與泰雅彩虹意象</h4>
+                        <p class="text-xs text-brand-cream/70 font-light mt-2 leading-relaxed">
+                            以泰雅族傳統高腳竹寮為靈感，讓結構與森林交織，風光水氣自由穿透。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Brand Story -->
+                <div class="space-y-6">
+                    <div class="inline-flex items-center gap-2 text-brand-gold text-xs font-medium tracking-[0.25em] uppercase">
+                        <span class="w-8 h-px bg-brand-gold"></span> PHILOSOPHY OF FUSEN BANZHI
+                    </div>
+                    
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif-title font-light leading-tight text-brand-green">
+                        以虹之名 <br><span class="text-brand-gold font-normal">歸於山林的呼吸節奏</span>
+                    </h2>
+
+                    <p class="text-brand-muted leading-relaxed font-light text-sm sm:text-base">
+                        「阪治」源自泰雅族語，為地名也是土地的記憶。馥森阪治 Trio 佇立於新北烏來美人湯源頭，集結了「溫泉風呂、因諾莉餐飲、森林生活儀式」三大元素。
+                    </p>
+
+                    <p class="text-brand-muted leading-relaxed font-light text-sm sm:text-base">
+                        建築外觀採用竹材與暗色金屬鷹架，向烏來泰雅族的傳統家屋構造致敬。在這裡，時間不再緊迫，您可以漫步於山林迴廊、在私人獨立湯屋俯瞰群山，最後享用原民香料揉合法式精緻烹調的因諾莉佳餚。
+                    </p>
+
+                    <!-- Three Pillar Badges -->
+                    <div class="grid grid-cols-3 gap-4 pt-6 border-t border-brand-sand">
+                        <div class="text-center p-3 rounded-xl bg-brand-sand/40">
+                            <i class="fa-solid fa-hot-tub-person text-brand-green text-xl mb-2"></i>
+                            <h4 class="font-serif-title font-medium text-xs sm:text-sm text-brand-green">山景泉質</h4>
+                            <span class="text-[11px] text-brand-muted block mt-0.5">碳酸氫鈉泉</span>
+                        </div>
+                        <div class="text-center p-3 rounded-xl bg-brand-sand/40">
+                            <i class="fa-solid fa-utensils text-brand-green text-xl mb-2"></i>
+                            <h4 class="font-serif-title font-medium text-xs sm:text-sm text-brand-green">因諾莉美饌</h4>
+                            <span class="text-[11px] text-brand-muted block mt-0.5">泰雅原民風味</span>
+                        </div>
+                        <div class="text-center p-3 rounded-xl bg-brand-sand/40">
+                            <i class="fa-solid fa-bell text-brand-green text-xl mb-2"></i>
+                            <h4 class="font-serif-title font-medium text-xs sm:text-sm text-brand-green">磬音儀式</h4>
+                            <span class="text-[11px] text-brand-muted block mt-0.5">森林慢時光</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Bathhouses Section (山景湯屋) -->
+    <section id="bathhouse" class="py-24 bg-brand-green text-brand-cream relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-gold text-xs tracking-[0.3em] uppercase block mb-3">PRIVATE BATHHOUSE SUITES</span>
+                <h2 class="text-3xl sm:text-4xl font-serif-title font-light">五大系列 ‧ 隱密山景湯屋</h2>
+                <div class="w-12 h-0.5 bg-brand-gold mx-auto mt-4"></div>
+                <p class="text-brand-cream/70 mt-4 text-xs sm:text-sm font-light leading-relaxed">
+                    每間湯屋皆配備大片景觀車窗視野、獨家天然碳酸氫鈉泉與冷熱雙池設施，洗滌您身上的喧囂與疲憊。
+                </p>
+            </div>
+
+            <!-- Bathhouse Cards Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Bathhouse 1: 虹音 Hong Yin -->
+                <div class="bg-brand-lightgreen/40 rounded-3xl overflow-hidden border border-brand-gold/30 shadow-xl flex flex-col hover:border-brand-gold transition duration-300">
+                    <div class="zoom-img-container h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80" 
+                             alt="虹音湯屋" 
+                             class="w-full h-full object-cover zoom-img"
+                             onerror="this.src='https://placehold.co/800x600/243e32/f6f3eb?text=Hong+Yin+Suite'">
+                        <span class="absolute top-4 left-4 bg-brand-green/90 text-brand-gold text-xs px-3.5 py-1 rounded-full border border-brand-gold/30 backdrop-blur-sm font-serif-title">
+                            旗艦推薦 ‧ 虹音
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-baseline mb-2">
+                                <h3 class="text-2xl font-serif-title text-brand-cream">虹音 (Hong Yin)</h3>
+                                <span class="text-brand-gold font-serif-title text-lg">NT$ 4,500 <small class="text-xs text-brand-cream/60">/ 90分</small></span>
+                            </div>
+                            <p class="text-brand-cream/70 text-xs leading-relaxed mb-4 font-light">
+                                全館最大奢華景觀湯屋，擁有無邊際山景視角與冷熱池，適合家庭或追求頂級私密體驗之賓客。
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-brand-gold/20 flex justify-between items-center text-xs text-brand-cream/60">
+                            <span><i class="fa-solid fa-arrows-left-right text-brand-gold mr-1"></i> 大坪數 (約 12 坪)</span>
+                            <button onclick="openBathhouseModal('虹音', 'NT$ 4,500', '12坪獨立冷熱池，全景大落地窗，附舒壓沙發椅與獨立洗手洗浴設備。')" class="text-brand-gold hover:underline">
+                                詳情與細節 ➔
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bathhouse 2: 夢杻 Meng Chuu -->
+                <div class="bg-brand-lightgreen/40 rounded-3xl overflow-hidden border border-brand-gold/30 shadow-xl flex flex-col hover:border-brand-gold transition duration-300">
+                    <div class="zoom-img-container h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80" 
+                             alt="夢杻湯屋" 
+                             class="w-full h-full object-cover zoom-img"
+                             onerror="this.src='https://placehold.co/800x600/243e32/f6f3eb?text=Meng+Chuu+Suite'">
+                        <span class="absolute top-4 left-4 bg-brand-green/90 text-brand-gold text-xs px-3.5 py-1 rounded-full border border-brand-gold/30 backdrop-blur-sm font-serif-title">
+                            情侶熱銷 ‧ 夢杻
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-baseline mb-2">
+                                <h3 class="text-2xl font-serif-title text-brand-cream">夢杻 (Meng Chuu)</h3>
+                                <span class="text-brand-gold font-serif-title text-lg">NT$ 3,000 <small class="text-xs text-brand-cream/60">/ 90分</small></span>
+                            </div>
+                            <p class="text-brand-cream/70 text-xs leading-relaxed mb-4 font-light">
+                                專為雙人設計的溫暖木質調湯屋，面向烏來密林與雲霧，氣氛安詳沉靜。
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-brand-gold/20 flex justify-between items-center text-xs text-brand-cream/60">
+                            <span><i class="fa-solid fa-user-group text-brand-gold mr-1"></i> 建議 2 人使用</span>
+                            <button onclick="openBathhouseModal('夢杻', 'NT$ 3,000', '溫潤木質風格湯屋，大理石熱湯池，近距離感受綠意圍繞。')" class="text-brand-gold hover:underline">
+                                詳情與細節 ➔
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bathhouse 3: 聊遮 Liao Zhe -->
+                <div class="bg-brand-lightgreen/40 rounded-3xl overflow-hidden border border-brand-gold/30 shadow-xl flex flex-col hover:border-brand-gold transition duration-300">
+                    <div class="zoom-img-container h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=800&q=80" 
+                             alt="聊遮湯屋" 
+                             class="w-full h-full object-cover zoom-img"
+                             onerror="this.src='https://placehold.co/800x600/243e32/f6f3eb?text=Liao+Zhe+Suite'">
+                        <span class="absolute top-4 left-4 bg-brand-green/90 text-brand-gold text-xs px-3.5 py-1 rounded-full border border-brand-gold/30 backdrop-blur-sm font-serif-title">
+                            家庭首選 ‧ 聊遮
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-baseline mb-2">
+                                <h3 class="text-2xl font-serif-title text-brand-cream">聊遮 (Liao Zhe)</h3>
+                                <span class="text-brand-gold font-serif-title text-lg">NT$ 3,600 <small class="text-xs text-brand-cream/60">/ 90分</small></span>
+                            </div>
+                            <p class="text-brand-cream/70 text-xs leading-relaxed mb-4 font-light">
+                                通透寬敞的家庭景觀湯屋，備有冷熱雙池與休憩區域，非常適合親友一同前來度過午後時光。
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-brand-gold/20 flex justify-between items-center text-xs text-brand-cream/60">
+                            <span><i class="fa-solid fa-users text-brand-gold mr-1"></i> 可容納 2-4 人</span>
+                            <button onclick="openBathhouseModal('聊遮', 'NT$ 3,600', '寬敞家庭湯屋，冷熱池一應俱全，獨立景觀茶几座位。')" class="text-brand-gold hover:underline">
+                                詳情與細節 ➔
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bathhouse 4: 採雲 Cai Yun -->
+                <div class="bg-brand-lightgreen/40 rounded-3xl overflow-hidden border border-brand-gold/30 shadow-xl flex flex-col hover:border-brand-gold transition duration-300">
+                    <div class="zoom-img-container h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" 
+                             alt="採雲湯屋" 
+                             class="w-full h-full object-cover zoom-img"
+                             onerror="this.src='https://placehold.co/800x600/243e32/f6f3eb?text=Cai+Yun+Suite'">
+                        <span class="absolute top-4 left-4 bg-brand-green/90 text-brand-gold text-xs px-3.5 py-1 rounded-full border border-brand-gold/30 backdrop-blur-sm font-serif-title">
+                            採光絕佳 ‧ 採雲
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-baseline mb-2">
+                                <h3 class="text-2xl font-serif-title text-brand-cream">採雲 (Cai Yun)</h3>
+                                <span class="text-brand-gold font-serif-title text-lg">NT$ 2,800 <small class="text-xs text-brand-cream/60">/ 90分</small></span>
+                            </div>
+                            <p class="text-brand-cream/70 text-xs leading-relaxed mb-4 font-light">
+                                頂樓景觀角度，白天享受雲霧飄渺與極致日光，傍晚欣賞烏來山谷黃昏光影變化。
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-brand-gold/20 flex justify-between items-center text-xs text-brand-cream/60">
+                            <span><i class="fa-solid fa-cloud-sun text-brand-gold mr-1"></i> 高樓層極致視野</span>
+                            <button onclick="openBathhouseModal('採雲', 'NT$ 2,800', '採光極佳，獨立單池，附高品質盥洗用品與茶飲。')" class="text-brand-gold hover:underline">
+                                詳情與細節 ➔
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bathhouse 5: 原沐 Yuan Mu -->
+                <div class="bg-brand-lightgreen/40 rounded-3xl overflow-hidden border border-brand-gold/30 shadow-xl flex flex-col hover:border-brand-gold transition duration-300">
+                    <div class="zoom-img-container h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80" 
+                             alt="原沐湯屋" 
+                             class="w-full h-full object-cover zoom-img"
+                             onerror="this.src='https://placehold.co/800x600/243e32/f6f3eb?text=Yuan+Mu+Suite'">
+                        <span class="absolute top-4 left-4 bg-brand-green/90 text-brand-gold text-xs px-3.5 py-1 rounded-full border border-brand-gold/30 backdrop-blur-sm font-serif-title">
+                            純粹極簡 ‧ 原沐
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-baseline mb-2">
+                                <h3 class="text-2xl font-serif-title text-brand-cream">原沐 (Yuan Mu)</h3>
+                                <span class="text-brand-gold font-serif-title text-lg">NT$ 2,400 <small class="text-xs text-brand-cream/60">/ 90分</small></span>
+                            </div>
+                            <p class="text-brand-cream/70 text-xs leading-relaxed mb-4 font-light">
+                                保留原始質感石材與簡約設計，給您最純粹無負擔的碳酸氫鈉泉潤膚饗宴。
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-brand-gold/20 flex justify-between items-center text-xs text-brand-cream/60">
+                            <span><i class="fa-solid fa-droplet text-brand-gold mr-1"></i> 美人湯質純粹</span>
+                            <button onclick="openBathhouseModal('原沐', 'NT$ 2,400', '精緻精簡雙人湯屋，高性價比體驗，適合輕鬆泡湯行程。')" class="text-brand-gold hover:underline">
+                                詳情與細節 ➔
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Combined Package Card -->
+                <div class="bg-gradient-to-br from-brand-gold/20 to-brand-lightgreen/60 rounded-3xl p-8 border border-brand-gold/50 shadow-2xl flex flex-col justify-between text-center">
+                    <div>
+                        <span class="text-brand-gold text-xs tracking-widest uppercase block mb-2">RECOMMENDED PACKAGE</span>
+                        <h3 class="text-2xl font-serif-title text-brand-cream mb-4">阪治雙享 ‧ 湯屋＋因諾莉美饌</h3>
+                        <p class="text-brand-cream/80 text-xs leading-relaxed font-light mb-6">
+                            包含 90 分鐘景觀湯屋體驗 ＋ 因諾莉餐廳精緻原民風季節套餐（乙客 / 雙人），一次滿足視覺、聽覺與味蕾。
+                        </p>
+                    </div>
+                    <div>
+                        <div class="text-brand-gold font-serif-title text-2xl mb-6">
+                            NT$ 4,200 <small class="text-xs text-brand-cream/60">起 / 雙人優惠</small>
+                        </div>
+                        <a href="#reservation" class="block w-full py-3.5 bg-brand-gold hover:bg-brand-darkgold text-brand-ink font-semibold rounded-full text-xs tracking-widest transition">
+                            預約雙享優惠 ➔
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Dining Section (因諾莉餐廳 Innori) -->
+    <section id="dining" class="py-24 bg-brand-cream text-brand-ink">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Text Narrative -->
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-brand-gold text-xs tracking-[0.25em] font-medium uppercase block">INNORI RESTAURANT</span>
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif-title font-light text-brand-green leading-tight">
+                        因諾莉餐廳 <br><span class="text-brand-gold font-normal">泰雅香料與當季野菜饗宴</span>
+                    </h2>
+
+                    <p class="text-brand-muted leading-relaxed font-light text-sm sm:text-base">
+                        「Innori」在原住民語中代表著「祈禱」與「感恩」。餐廳空間大量運用透光落地窗與原木質感，讓陽光與綠意灑落於餐桌之上。
+                    </p>
+
+                    <p class="text-brand-muted leading-relaxed font-light text-sm sm:text-base">
+                        主廚嚴選烏來山區產之山胡椒（馬告）、刺蔥、當季野蕨，結合低溫慢煮與精緻法式擺盤，創作出令人驚豔的山林原民創意料理。
+                    </p>
+
+                    <!-- Restaurant Quick Highlights -->
+                    <div class="space-y-3 pt-2">
+                        <div class="flex items-center space-x-3 text-xs text-brand-ink">
+                            <i class="fa-solid fa-leaf text-brand-gold text-base"></i>
+                            <span><b>在地食材:</b> 烏來高山野菜、天然馬告香料、冷泉鱒魚</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-xs text-brand-ink">
+                            <i class="fa-solid fa-clock text-brand-gold text-base"></i>
+                            <span><b>供餐時間:</b> 午餐 11:30 - 14:30 ｜ 午茶 14:30 - 17:00 ｜ 晚餐 17:30 - 20:00</span>
+                        </div>
+                    </div>
+
+                    <a href="#reservation" class="inline-block mt-4 px-8 py-3.5 bg-brand-green hover:bg-brand-lightgreen text-brand-cream rounded-full text-xs tracking-widest transition">
+                        線上預訂餐位 ↗
+                    </a>
+                </div>
+
+                <!-- Right Featured Dish Cards -->
+                <div class="lg:col-span-7 grid sm:grid-cols-2 gap-6">
+                    
+                    <!-- Dish 1 -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-brand-sand">
+                        <div class="zoom-img-container h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" 
+                                 alt="馬告香草爐烤山豬排" 
+                                 class="w-full h-full object-cover zoom-img"
+                                 onerror="this.src='https://placehold.co/600x400/345545/f6f3eb?text=Makauy+Pork'">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-[10px] text-brand-gold tracking-widest uppercase font-medium">主廚推薦</span>
+                            <h4 class="font-serif-title font-semibold text-lg text-brand-green mt-1">馬告香草低溫熟成山豬排</h4>
+                            <p class="text-xs text-brand-muted mt-2 leading-relaxed font-light">
+                                以烏來特產馬告（山胡椒）醃漬低溫慢煮，搭配刺蔥奶油醬，肉質鮮嫩多汁，香氣獨特。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Dish 2 -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-brand-sand">
+                        <div class="zoom-img-container h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=80" 
+                                 alt="烏來冷泉虹鱒三吃" 
+                                 class="w-full h-full object-cover zoom-img"
+                                 onerror="this.src='https://placehold.co/600x400/345545/f6f3eb?text=Cold+Spring+Trout'">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-[10px] text-brand-gold tracking-widest uppercase font-medium">山泉鮮味</span>
+                            <h4 class="font-serif-title font-semibold text-lg text-brand-green mt-1">烏來冷泉虹鱒佐香蔥沙拉</h4>
+                            <p class="text-xs text-brand-muted mt-2 leading-relaxed font-light">
+                                採用烏來乾淨山泉養殖之虹鱒，皮酥肉嫩，搭配當季高山野蕨與特調酸甜醬汁。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Dish 3 -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-brand-sand">
+                        <div class="zoom-img-container h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80" 
+                                 alt="高山野蕨與松露溫沙拉" 
+                                 class="w-full h-full object-cover zoom-img"
+                                 onerror="this.src='https://placehold.co/600x400/345545/f6f3eb?text=Mountain+Salad'">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-[10px] text-brand-gold tracking-widest uppercase font-medium">當季時蔬</span>
+                            <h4 class="font-serif-title font-semibold text-lg text-brand-green mt-1">高山過貓與野菇溫沙拉</h4>
+                            <p class="text-xs text-brand-muted mt-2 leading-relaxed font-light">
+                                每日清晨採摘烏來嫩蕨過貓，拌入炙燒綜合野菇與特製胡麻刺蔥油醬。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Dish 4 -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-brand-sand">
+                        <div class="zoom-img-container h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80" 
+                                 alt="手作竹筒香飯與午茶特調" 
+                                 class="w-full h-full object-cover zoom-img"
+                                 onerror="this.src='https://placehold.co/600x400/345545/f6f3eb?text=Atayal+Tea'">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-[10px] text-brand-gold tracking-widest uppercase font-medium">特調下午茶</span>
+                            <h4 class="font-serif-title font-semibold text-lg text-brand-green mt-1">刺蔥風味拿鐵與手作甜點</h4>
+                            <p class="text-xs text-brand-muted mt-2 leading-relaxed font-light">
+                                融合泰雅香草植物特調咖啡與手作馬告乳酪塔，享受森林溪谷邊的愜意下午茶。
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Sensory & Gallery Section (森林慢時光與生活儀式) -->
+    <section id="sensory" class="py-24 bg-brand-green text-brand-cream relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-gold text-xs tracking-[0.3em] uppercase block mb-3">SLOWNESS & RITUALS</span>
+                <h2 class="text-3xl sm:text-4xl font-serif-title font-light">山裡風景 ‧ 森林慢時光</h2>
+                <div class="w-12 h-0.5 bg-brand-gold mx-auto mt-4"></div>
+                <p class="text-brand-cream/70 mt-4 text-xs sm:text-sm font-light leading-relaxed">
+                    每日下午，山林間將迴盪著頌磬音療與音樂表演，讓身體與心靈在自然迴響中重獲寧靜。
+                </p>
+            </div>
+
+            <!-- Gallery Grid with Filterable Lightbox Preview -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="zoom-img-container rounded-2xl overflow-hidden h-60 relative border border-brand-gold/20">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="烏來山嵐" class="w-full h-full object-cover zoom-img">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 hover:opacity-100 transition duration-300 flex items-end p-4">
+                        <span class="text-xs font-serif-title">山嵐雨霧景色</span>
+                    </div>
+                </div>
+                <div class="zoom-img-container rounded-2xl overflow-hidden h-60 relative border border-brand-gold/20">
+                    <img src="https://images.unsplash.com/photo-1511884642898-4c92249e20b6?auto=format&fit=crop&w=800&q=80" alt="鷹架風建築" class="w-full h-full object-cover zoom-img">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 hover:opacity-100 transition duration-300 flex items-end p-4">
+                        <span class="text-xs font-serif-title">泰雅鷹架建築意象</span>
+                    </div>
+                </div>
+                <div class="zoom-img-container rounded-2xl overflow-hidden h-60 relative border border-brand-gold/20">
+                    <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80" alt="景觀雙人湯池" class="w-full h-full object-cover zoom-img">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 hover:opacity-100 transition duration-300 flex items-end p-4">
+                        <span class="text-xs font-serif-title">溫泉獨立池湯屋</span>
+                    </div>
+                </div>
+                <div class="zoom-img-container rounded-2xl overflow-hidden h-60 relative border border-brand-gold/20">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" alt="因諾莉景觀餐廳" class="w-full h-full object-cover zoom-img">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 hover:opacity-100 transition duration-300 flex items-end p-4">
+                        <span class="text-xs font-serif-title">因諾莉自然用餐空間</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transportation Section (交通與接駁指引) -->
+    <section id="transport" class="py-24 bg-brand-cream text-brand-ink">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Details -->
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-brand-gold text-xs tracking-[0.25em] font-medium uppercase block">LOCATION & SHUTTLE</span>
+                    <h2 class="text-3xl sm:text-4xl font-serif-title font-light text-brand-green leading-tight">
+                        交通指引與專車接駁
+                    </h2>
+
+                    <div class="space-y-4 pt-2">
+                        <div class="p-4 bg-white rounded-2xl border border-brand-sand shadow-sm flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-full bg-brand-green text-brand-gold flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-serif-title font-semibold text-brand-green text-sm">地址資訊</h4>
+                                <p class="text-xs text-brand-muted mt-1">233 新北市烏來區環山路151號</p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 bg-white rounded-2xl border border-brand-sand shadow-sm flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-full bg-brand-green text-brand-gold flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-van-shuttle"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-serif-title font-semibold text-brand-green text-sm">新店捷運站預約接駁</h4>
+                                <p class="text-xs text-brand-muted mt-1">由新店捷運站發車，需提前 1 日預約。單程約 35 分鐘。</p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 bg-white rounded-2xl border border-brand-sand shadow-sm flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-full bg-brand-green text-brand-gold flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-square-parking"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-serif-title font-semibold text-brand-green text-sm">自駕與停車</h4>
+                                <p class="text-xs text-brand-muted mt-1">國道 3 號下新店交流道，沿台 9 甲線直行至烏來環山路，附設專屬貴賓停車場。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://maps.google.com/?q=馥森阪治" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-brand-green hover:bg-brand-lightgreen text-brand-cream px-6 py-3.5 rounded-full text-xs tracking-widest shadow-md transition">
+                        <i class="fa-solid fa-map-location-dot text-brand-gold"></i> 開啟 Google 地圖導航
+                    </a>
+                </div>
+
+                <!-- Right Map Embed -->
+                <div class="lg:col-span-7">
+                    <div class="bg-white p-4 rounded-3xl border border-brand-sand shadow-xl">
+                        <div class="w-full h-[400px] rounded-2xl overflow-hidden bg-brand-sand">
+                            <iframe 
+                                title="馥森阪治地圖"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3618.847250912172!2d121.5501869760927!3d24.869037345532057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346803875dc02dbd%3A0xe7bc3df235a909a3!2z6aa55qOu6Ziq5LqyIFRyaW8!5e0!3m2!1szh-TW!2stw!4v1710000000000!5m2!1szh-TW!2stw" 
+                                class="w-full h-full border-0" 
+                                allowfullscreen="" 
+                                loading="lazy">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation & Pricing Estimator Section (線上預約與試算) -->
+    <section id="reservation" class="py-24 bg-brand-green text-brand-cream relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-brand-lightgreen/30 border border-brand-gold/40 p-8 sm:p-12 rounded-3xl shadow-2xl backdrop-blur-md">
+                
+                <div class="text-center mb-10">
+                    <span class="text-brand-gold text-xs tracking-[0.3em] uppercase block mb-2">ONLINE RESERVATION</span>
+                    <h2 class="text-3xl sm:text-4xl font-serif-title font-light">線上預約 / 費用即時試算</h2>
+                    <p class="text-xs text-brand-cream/70 mt-2 font-light">
+                        選擇您的需求項目，系統將自動計算費用，並送出專人確認訂位。
+                    </p>
+                </div>
+
+                <form id="booking-form" class="space-y-6">
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs text-brand-gold tracking-wider mb-2">貴賓姓名 *</label>
+                            <input type="text" required placeholder="例如：張先生 / 先生小姐" class="w-full bg-brand-green/80 border border-brand-gold/30 rounded-xl px-4 py-3 text-sm text-brand-cream focus:outline-none focus:border-brand-gold">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-brand-gold tracking-wider mb-2">聯絡電話 *</label>
+                            <input type="tel" required placeholder="0912-345-678" class="w-full bg-brand-green/80 border border-brand-gold/30 rounded-xl px-4 py-3 text-sm text-brand-cream focus:outline-none focus:border-brand-gold">
+                        </div>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs text-brand-gold tracking-wider mb-2">預約項目 *</label>
+                            <select id="package-select" class="w-full bg-brand-green/80 border border-brand-gold/30 rounded-xl px-4 py-3 text-sm text-brand-cream focus:outline-none focus:border-brand-gold">
+                                <option value="double_combo" data-price="4200">阪治雙享 (湯屋 90分 + 雙人因諾莉套餐) - $4,200</option>
+                                <option value="hongyin" data-price="4500">虹音湯屋 (90分) - $4,500</option>
+                                <option value="mengchuu" data-price="3000">夢杻湯屋 (90分) - $3,000</option>
+                                <option value="liaozhe" data-price="3600">聊遮湯屋 (90分) - $3,600</option>
+                                <option value="caiyun" data-price="2800">採雲湯屋 (90分) - $2,800</option>
+                                <option value="yuanmu" data-price="2400">原沐湯屋 (90分) - $2,400</option>
+                                <option value="dining_only" data-price="1280">僅預約因諾莉餐廳 (單人套餐) - $1,280</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-brand-gold tracking-wider mb-2">預約日期與時間 *</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="date" required class="w-full bg-brand-green/80 border border-brand-gold/30 rounded-xl px-3 py-3 text-xs text-brand-cream focus:outline-none focus:border-brand-gold">
+                                <select class="w-full bg-brand-green/80 border border-brand-gold/30 rounded-xl px-2 py-3 text-xs text-brand-cream focus:outline-none focus:border-brand-gold">
+                                    <option>10:00</option>
+                                    <option>12:00</option>
+                                    <option>14:00</option>
+                                    <option>16:00</option>
+                                    <option>18:00</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs text-brand-gold tracking-wider mb-2">人數 *</label>
+                            <select id="guest-count" class="w-full bg-brand-green/80 border border-brand-gold/30 rounded-xl px-4 py-3 text-sm text-brand-cream focus:outline-none focus:border-brand-gold">
+                                <option value="2">2 人</option>
+                                <option value="1">1 人</option>
+                                <option value="3">3 人</option>
+                                <option value="4">4 人</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-brand-gold tracking-wider mb-2">接駁車需求</label>
+                            <select class="w-full bg-brand-green/80 border border-brand-gold/30 rounded-xl px-4 py-3 text-sm text-brand-cream focus:outline-none focus:border-brand-gold">
+                                <option>不需要接駁（自行開車/搭車）</option>
+                                <option>需要新店捷運站往返接駁車</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Estimated Total Banner -->
+                    <div class="p-4 bg-brand-green/90 rounded-2xl border border-brand-gold/50 flex justify-between items-center">
+                        <span class="text-xs text-brand-cream/80 font-light">預估體驗總費用:</span>
+                        <span class="text-2xl font-serif-title text-brand-gold font-semibold" id="total-price-display">NT$ 4,200</span>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 bg-brand-gold hover:bg-brand-darkgold text-brand-ink font-semibold rounded-full tracking-widest text-sm transition shadow-lg">
+                        <i class="fa-solid fa-paper-plane mr-2"></i> 送出預約申請 ↗
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-ink text-brand-cream/60 py-16 border-t border-brand-sand/20 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="space-y-3">
+                    <span class="text-xl font-serif-title text-brand-cream block">馥森 阪治 Trio</span>
+                    <p class="text-xs font-light leading-relaxed">
+                        把一個下午，留給山裡。<br>新北烏來頂級山景溫泉與因諾莉原民風靈魂餐廳。
+                    </p>
+                </div>
+                <div>
+                    <h5 class="font-serif-title text-brand-gold text-sm mb-3">服務項目</h5>
+                    <ul class="space-y-2 font-light">
+                        <li><a href="#bathhouse" class="hover:underline">獨立山景湯屋</a></li>
+                        <li><a href="#dining" class="hover:underline">因諾莉 Innori 餐廳</a></li>
+                        <li><a href="#sensory" class="hover:underline">磬音音樂慢時光</a></li>
+                        <li><a href="#reservation" class="hover:underline">貴賓專屬接駁車</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-serif-title text-brand-gold text-sm mb-3">聯絡資訊</h5>
+                    <ul class="space-y-2 font-light">
+                        <li>電話: 02-2661-6688</li>
+                        <li>地址: 新北市烏來區環山路151號</li>
+                        <li>營業時間: 10:00 - 20:00</li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-serif-title text-brand-gold text-sm mb-3">關注官方粉專</h5>
+                    <div class="flex space-x-4 text-lg text-brand-gold">
+                        <a href="https://facebook.com" target="_blank" class="hover:text-brand-cream"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://instagram.com" target="_blank" class="hover:text-brand-cream"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://line.me" target="_blank" class="hover:text-brand-cream"><i class="fa-brands fa-line"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-brand-sand/10 text-center font-light">
+                &copy; 2026 馥森阪治 Fusen Banzhi Trio. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bathhouse Modal Lightbox -->
+    <div id="bathhouse-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-brand-cream text-brand-ink max-w-lg w-full rounded-3xl p-8 border border-brand-sand relative shadow-2xl">
+            <button onclick="closeBathhouseModal()" class="absolute top-4 right-4 text-brand-muted hover:text-brand-ink text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 class="text-2xl font-serif-title text-brand-green mb-2" id="modal-title">湯屋名稱</h3>
+            <span class="text-brand-gold font-serif-title text-lg block mb-4" id="modal-price">NT$ 0</span>
+            <p class="text-xs text-brand-muted leading-relaxed mb-6 font-light" id="modal-description">湯屋說明...</p>
+            <a href="#reservation" onclick="closeBathhouseModal()" class="block text-center py-3 bg-brand-green text-brand-cream rounded-full text-xs tracking-widest font-medium">
+                立即預約此房型 ↗
+            </a>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-brand-green text-brand-cream px-6 py-4 rounded-2xl shadow-2xl border border-brand-gold/40 flex items-center space-x-3 translate-y-32 opacity-0 transition-all duration-300">
+        <i class="fa-solid fa-circle-check text-xl text-brand-gold"></i>
+        <div>
+            <h5 class="font-serif-title text-sm">預約需求已成功送出！</h5>
+            <p class="text-[11px] text-brand-cream/80 font-light">馥森阪治客服專員將儘快與您聯繫確認。</p>
+        </div>
+    </div>
+
+    <!-- JavaScript Interactions -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Drawer Toggle
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    menuIcon.className = 'fa-solid fa-bars text-2xl';
+                } else {
+                    menuIcon.className = 'fa-solid fa-xmark text-2xl';
+                }
+            });
+
+            // Live Price Calculation in Reservation Form
+            const packageSelect = document.getElementById('package-select');
+            const guestSelect = document.getElementById('guest-count');
+            const totalPriceDisplay = document.getElementById('total-price-display');
+
+            function updatePrice() {
+                const selectedOption = packageSelect.options[packageSelect.selectedIndex];
+                const basePrice = parseInt(selectedOption.getAttribute('data-price')) || 0;
+                const guests = parseInt(guestSelect.value) || 1;
+
+                let finalPrice = basePrice;
+                if (packageSelect.value === 'dining_only') {
+                    finalPrice = basePrice * guests;
+                }
+
+                totalPriceDisplay.textContent = `NT$ ${finalPrice.toLocaleString()}`;
+            }
+
+            packageSelect.addEventListener('change', updatePrice);
+            guestSelect.addEventListener('change', updatePrice);
+
+            // Handle Booking Form Submit
+            const bookingForm = document.getElementById('booking-form');
+            const toast = document.getElementById('toast');
+
+            bookingForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                toast.classList.remove('translate-y-32', 'opacity-0');
+                setTimeout(() => {
+                    toast.classList.add('translate-y-32', 'opacity-0');
+                }, 4000);
+                bookingForm.reset();
+                updatePrice();
+            });
+        });
+
+        // Bathhouse Lightbox Modal Logic
+        function openBathhouseModal(title, price, desc) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-price').textContent = price;
+            document.getElementById('modal-description').textContent = desc;
+            document.getElementById('bathhouse-modal').classList.remove('hidden');
+        }
+
+        function closeBathhouseModal() {
+            document.getElementById('bathhouse-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
